@@ -1,7 +1,7 @@
 import swal from 'sweetalert'
 import React, { useState } from 'react'
+// Login users Auth
 async function loginUser(credentials) {
-	console.log(credentials, 'ssd')
 	return fetch('http://localhost:3000/auth/users', {
 		method: 'POST',
 		headers: {

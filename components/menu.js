@@ -1,5 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react'
+import { useRouter } from 'next/router'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
@@ -10,11 +11,13 @@ const user = {
 		'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
-	{ name: 'Dashboard', href: '/home', current: false },
-	{ name: 'Users', href: '/users/', current: true },
-	{ name: 'Country', href: '#', current: false },
-	{ name: 'Category', href: '#', current: false },
-	{ name: 'Currency', href: '#', current: false },
+	{ name: 'Dashboard', href: '/home' },
+	{ name: 'Users', href: '/users' },
+	{ name: 'Category', href: '/category' },
+	{ name: 'Currency', href: '/currency' },
+	{ name: 'Country', href: '/country' },
+	{ name: 'City', href: '/city' },
+	{ name: 'Listing', href: '/listing' },
 ]
 const userNavigation = [
 	{ name: 'Your Profile', href: '#' },
@@ -27,6 +30,7 @@ function classNames(...classes) {
 }
 
 export default function menu() {
+	const router = useRouter()
 	return (
 		<>
 			<Disclosure as="nav" className="bg-gray-800">
@@ -49,7 +53,7 @@ export default function menu() {
 													key={item.name}
 													href={item.href}
 													className={classNames(
-														item.current
+														router.pathname === item.href
 															? 'bg-gray-900 text-white'
 															: 'text-gray-300 hover:bg-gray-700 hover:text-white',
 														'px-3 py-2 rounded-md text-sm font-medium'
