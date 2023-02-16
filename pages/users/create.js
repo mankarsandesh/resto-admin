@@ -1,23 +1,22 @@
 import defaultLayout from '../../components/defaultLayout'
 import Menu from '../../components/menu'
-import UsersTable from '../../components/Main/UsersTable'
+import CreateUsers from '../../components/Main/CreateUsers'
 import PageHeader from '../../components/PageHeader'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-export default function Users() {
+
+export default function Create() {
 	return (
 		<>
 			<Menu />
-			<PageHeader title="Users List" />
+			<PageHeader title="Create Users" />
 			<main>
 				<div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-					<UsersTable data="users" />
+					<CreateUsers />
 				</div>
 			</main>
 		</>
 	)
 }
 
-Users.getLayout = function getLayout(page) {
+Create.getLayout = function getLayout(page) {
 	return <defaultLayout>{page}</defaultLayout>
 }

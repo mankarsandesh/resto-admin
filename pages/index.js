@@ -36,7 +36,7 @@ export default function Index() {
 		} else {
 			swal('Failed', response.error, 'error')
 		}
-		SetLoading(false)
+		SetLoading(true)
 	}
 
 	return (

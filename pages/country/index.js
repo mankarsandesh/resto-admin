@@ -2,11 +2,11 @@ import defaultLayout from '../../components/defaultLayout'
 import Menu from '../../components/menu'
 import PageHeader from '../../components/PageHeader'
 
-export default function Home() {
+export default function Country() {
 	return (
 		<>
 			<Menu />
-			<PageHeader title="Dashboard" />
+			<PageHeader title="Country" />
 			<main>
 				<div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
 					{/* Replace with your content */}
@@ -20,6 +20,6 @@ export default function Home() {
 	)
 }
 
-Home.getLayout = function getLayout(page) {
+Country.getLayout = function getLayout(page) {
 	return <defaultLayout>{page}</defaultLayout>
 }
