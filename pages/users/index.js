@@ -4,20 +4,64 @@ import UsersTable from '../../components/Main/UsersTable'
 import PageHeader from '../../components/PageHeader'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import Link from 'next/link'
+// Button
+const Button = () => {
+	return (
+		<Link href="users/create">
+			<button
+				type="button"
+				className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+			>
+				Add Users
+			</button>
+		</Link>
+	)
+}
 export default function Users() {
+	const data = [
+		{
+			name: 'Lindsay Walton',
+			title: 'Front-end Developer',
+			email: 'lindsay.walton@example.com',
+			role: 'Member',
+		},
+		{
+			name: 'Lindsay Walton',
+			title: 'Front-end Developer',
+			email: 'lindsay.walton@example.com',
+			role: 'Member',
+		},
+		{
+			name: 'Lindsay Walton',
+			title: 'Front-end Developer',
+			email: 'lindsay.walton@example.com',
+			role: 'Member',
+		},
+		{
+			name: 'Lindsay Walton',
+			title: 'Front-end Developer',
+			email: 'lindsay.walton@example.com',
+			role: 'Member',
+		},
+		// More people...
+	]
+	const rows = ['name', 'title', 'email', 'role', '']
 	return (
 		<>
 			<Menu />
-			<PageHeader title="Users List" />
 			<main>
 				<div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-					<UsersTable data="users" />
+					<div className="px-4 sm:px-6 lg:px-8 ">
+						<PageHeader title="Users List" button={<Button />} />
+						<UsersTable data={data} rows={rows} />
+					</div>
 				</div>
 			</main>
 		</>
 	)
 }
 
-Users.getLayout = function getLayout(page) {
-	return <defaultLayout>{page}</defaultLayout>
+Users.getLayout = function getLayout(Users) {
+	return <defaultLayout>{Users}</defaultLayout>
 }
