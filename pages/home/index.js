@@ -42,9 +42,15 @@ export default function Home() {
 				<div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
 					<div className="px-4 sm:px-6 lg:px-2 ">
 						<DashboardHeader />
-						<div className="mt-4">
+						<div className="mt-6">
 							<h3 className="text-base font-semibold leading-6 text-gray-900">
 								Recent Activity
+							</h3>
+							<DataTable data={data} rows={rows} />
+						</div>
+						<div className="mt-6">
+							<h3 className="text-base font-semibold leading-6 text-gray-900">
+								Top Listing - 10
 							</h3>
 							<DataTable data={data} rows={rows} />
 						</div>
