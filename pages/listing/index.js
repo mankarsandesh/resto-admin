@@ -1,6 +1,6 @@
 import defaultLayout from '../../components/defaultLayout'
 import Menu from '../../components/menu'
-import UsersTable from '../../components/Main/UsersTable'
+import DataTable from '../../components/Main/DataTable'
 import PageHeader from '../../components/PageHeader'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
@@ -51,10 +51,10 @@ export default function Listing() {
 		<>
 			<Menu />
 			<main>
-				<div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+				<div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-2 ">
 					<div className="px-4 sm:px-6 lg:px-8 ">
 						<PageHeader title="Listing List" button={<Button />} />
-						<UsersTable data={data} rows={rows} />
+						<DataTable data={data} rows={rows} />
 					</div>
 				</div>
 			</main>

@@ -3,10 +3,10 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
 
-export default function UsersTable(props) {
+export default function DataTable(props) {
 	return (
 		<div className="mt-4 flex flex-col">
-			<div className="-my-2 -mx-4 sm:-mx-6 lg:-mx-8">
+			<div className=" sm:-mx-6 px-4 py-5 sm:p-6">
 				<div className="inline-block min-w-full py-2 align-middle">
 					<div className="shadow-sm ring-1 ring-black ring-opacity-5">
 						<table

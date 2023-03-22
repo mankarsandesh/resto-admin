@@ -1,9 +1,9 @@
 import axios from 'axios'
 export default function CreateUsers() {
 	return (
-		<div className="px-4 sm:px-6 lg:px-8">
+		<div className="border rounded-md mt-6 ">
 			<form action="#" method="POST">
-				<div className="overflow-hidden shadow sm:rounded-md">
+				<div className="overflow-hidden  sm:rounded-md">
 					<div className="bg-white px-4 py-5 sm:p-6">
 						<div className="grid grid-cols-3 gap-6">
 							<div className="col-span-6 sm:col-span-3 lg:col-span-2">
