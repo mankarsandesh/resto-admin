@@ -28,7 +28,7 @@ export default function DataTable(props) {
 							</thead>
 							<tbody className="bg-white">
 								{props.data.map((person, personIdx) => (
-									<tr key={person.email}>
+									<tr key={personIdx}>
 										<td
 											className={classNames(
 												personIdx !== props.data.length - 1
