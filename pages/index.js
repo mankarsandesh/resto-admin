@@ -19,7 +19,6 @@ export default function Index() {
 
 	// Login Admin Panel
 	const handleSubmit = async (e) => {
-		console.log(process.env.BASE_URL, 'env url')
 		SetLoading(true)
 		e.preventDefault()
 		const response = await loginUser({
