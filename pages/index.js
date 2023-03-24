@@ -15,6 +15,7 @@ export default function Index() {
 	const [loading, SetLoading] = useState(false)
 	const [userEmail, setUserEmail] = useState()
 	const [password, setPassword] = useState()
+	const [error, setError] = useState('')
 
 	// Login Admin Panel
 	const handleSubmit = async (e) => {
@@ -25,17 +26,20 @@ export default function Index() {
 			userEmail,
 			password,
 		})
+		console.log(response, 'response')
 		if (response.code === 200) {
-			swal('Success', response.message, 'success', {
-				buttons: false,
-				timer: 2000,
-			}).then((value) => {
-				localStorage.setItem('accessToken', response['accessToken'])
-				localStorage.setItem('user', JSON.stringify(response['user']))
-				window.location.href = '/home'
-			})
+			// swal('Success', response.message, 'success', {
+			// 	buttons: false,
+			// 	timer: 2000,
+			// }).then((value) => {})
+			localStorage.setItem('accessToken', response.data.access_token)
+			localStorage.setItem('user', JSON.stringify(response.data))
+			// localStorage.setItem('user', JSON.stringify(response.data))
+			setError('')
+			window.location.href = '/home'
 		} else {
-			swal('Failed', response.error, 'error')
+			setError(response.error)
+			// swal('Failed', response.error, 'error')
 		}
 		SetLoading(false)
 	}
@@ -51,11 +55,11 @@ export default function Index() {
 					/>
 					<h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
 						Admin Panel
-						{loading ? 'load' : ''}
 					</h2>
 				</div>
 
 				<div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+					<div className="text-center text-red-600">{error}</div>
 					<div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 						<form
 							className="space-y-6"

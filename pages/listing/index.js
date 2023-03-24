@@ -1,5 +1,5 @@
 import defaultLayout from '../../components/defaultLayout'
-import Menu from '../../components/menu'
+import MenuBar from '../../components/MenuBar'
 import DataTable from '../../components/Main/DataTable'
 import PageHeader from '../../components/PageHeader'
 import { useState, useEffect } from 'react'
@@ -49,7 +49,7 @@ export default function Listing() {
 	const rows = ['name', 'title', 'email', 'role', '']
 	return (
 		<>
-			<Menu />
+			<MenuBar />
 			<main>
 				<div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-2 ">
 					<div className="px-4 sm:px-6 lg:px-8 ">

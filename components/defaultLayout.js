@@ -1,4 +1,4 @@
-import Menu from '../components/menu'
+import Menu from './MenuBar'
 
 export default function defaultLayout({ children }) {
 	return (

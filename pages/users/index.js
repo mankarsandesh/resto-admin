@@ -1,5 +1,5 @@
 import defaultLayout from '../../components/defaultLayout'
-import Menu from '../../components/menu'
+import Menu from '../../components/MenuBar'
 import DataTable from '../../components/Main/DataTable'
 import PageHeader from '../../components/PageHeader'
 import { useState, useEffect } from 'react'
@@ -47,6 +47,7 @@ export default function Users() {
 		// More people...
 	]
 	const rows = ['name', 'title', 'email', 'role', '']
+
 	return (
 		<>
 			<Menu />
