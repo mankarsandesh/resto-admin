@@ -19,6 +19,25 @@ const Button = () => {
 	)
 }
 export default function Users() {
+	const [userList, setUserList] = useState([])
+	useEffect(() => {
+		const url = process.env.BASE_URL + 'users'
+		const fetchData = async () => {
+			try {
+				const headers = {
+					'Content-Type': 'application/json',
+					'x-access-token': localStorage.getItem('accessToken'),
+				}
+				fetch(url, { headers })
+					.then((response) => response.json())
+					.then((data) => setUserList(data.data))
+			} catch (error) {
+				console.log('error', error)
+			}
+		}
+
+		fetchData()
+	}, [])
 	const data = [
 		{
 			name: 'Lindsay Walton',
@@ -46,8 +65,7 @@ export default function Users() {
 		},
 		// More people...
 	]
-	const rows = ['name', 'title', 'email', 'role', '']
-
+	const rows = ['name', 'email', 'type', 'status', '']
 	return (
 		<>
 			<Menu />
