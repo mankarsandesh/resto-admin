@@ -34,8 +34,8 @@ export default function MenuBar() {
 	const router = useRouter()
 	const [user, setUser] = useState({})
 	useEffect(() => {
-		console.log(JSON.parse(localStorage.getItem('user')))
-		setUser(JSON.parse(localStorage.getItem('user')))
+		// console.log(JSON.parse(localStorage.getItem('user')))
+		// setUser(JSON.parse(localStorage.getItem('user')))
 	}, [])
 	return (
 		<>

@@ -1,5 +1,3 @@
-import defaultLayout from '../../components/defaultLayout'
-import MenuBar from '../../components/MenuBar'
 import DataTable from '../../components/Main/DataTable'
 import PageHeader from '../../components/PageHeader'
 import { useState, useEffect } from 'react'
@@ -49,7 +47,6 @@ export default function Category() {
 	const rows = ['name', 'title', 'email', 'role', '']
 	return (
 		<>
-			<MenuBar />
 			<main>
 				<div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-2 ">
 					<div className="px-4 sm:px-6 lg:px-8 ">
@@ -62,6 +59,6 @@ export default function Category() {
 	)
 }
 
-Category.getLayout = function getLayout(page) {
-	return <defaultLayout>{page}</defaultLayout>
-}
+// Category.getLayout = function getLayout(page) {
+// 	return <defaultLayout>{page}</defaultLayout>
+// }

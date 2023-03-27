@@ -1,9 +1,6 @@
-import defaultLayout from '../../components/defaultLayout'
-import MenuBar from '../../components/MenuBar'
 import DataTable from '../../components/Main/DataTable'
 import PageHeader from '../../components/PageHeader'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+
 import Link from 'next/link'
 // Button
 const Button = () => {
@@ -49,7 +46,6 @@ export default function country() {
 	const rows = ['name', 'title', 'email', 'role', '']
 	return (
 		<>
-			<MenuBar />
 			<main>
 				<div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-2 ">
 					<div className="px-4 sm:px-6 lg:px-8 ">
@@ -60,8 +56,4 @@ export default function country() {
 			</main>
 		</>
 	)
-}
-
-country.getLayout = function getLayout(page) {
-	return <defaultLayout>{page}</defaultLayout>
 }

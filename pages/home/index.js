@@ -1,10 +1,5 @@
-import defaultLayout from '../../components/defaultLayout'
-import MenuBar from '../../components/MenuBar'
 import DashboardHeader from '../../components/dashboardHeader'
 import DataTable from '../../components/Main/DataTable'
-
-import Link from 'next/link'
-// Button
 
 export default function Home() {
 	const data = [
@@ -37,7 +32,6 @@ export default function Home() {
 	const rows = ['name', 'title', 'email', 'role', '']
 	return (
 		<>
-			<MenuBar />
 			<main>
 				<div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
 					<div className="px-4 sm:px-6 lg:px-2 ">
@@ -59,8 +53,4 @@ export default function Home() {
 			</main>
 		</>
 	)
-}
-
-Home.getLayout = function getLayout(page) {
-	return <defaultLayout>{page}</defaultLayout>
 }
