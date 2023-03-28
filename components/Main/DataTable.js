@@ -1,96 +1,112 @@
-import Link from 'next/link'
-function classNames(...classes) {
-	return classes.filter(Boolean).join(' ')
+import React, { useState, useEffect, useCallback, useMemo } from 'react'
+import ReactDOM from 'react-dom'
+import axios from 'axios'
+import DataTable from 'react-data-table-component'
+
+const removeItem = (array, item) => {
+	const newArray = array.slice()
+	newArray.splice(
+		newArray.findIndex((a) => a === item),
+		1
+	)
+
+	return newArray
 }
 
-export default function DataTable(props) {
+const AdvancedPaginationTable = () => {
+	const [data, setData] = useState([])
+	const [loading, setLoading] = useState(false)
+	const [totalRows, setTotalRows] = useState(0)
+	const [perPage, setPerPage] = useState(10)
+	const [currentPage, setCurrentPage] = useState(1)
+	// const [deleted, setDeleted] = useState([]);
+
+	const fetchUsers = async (page, size = perPage) => {
+		setLoading(true)
+
+		const response = await axios.get(
+			`https://reqres.in/api/users?page=${page}&per_page=${size}&delay=1`
+		)
+
+		setData(response.data.data)
+		setTotalRows(response.data.total)
+		setLoading(false)
+	}
+
+	useEffect(() => {
+		fetchUsers(1)
+	}, [])
+
+	const handleDelete = useCallback(
+		(row) => async () => {
+			await axios.delete(`https://reqres.in/api/users/${row.id}`)
+			const response = await axios.get(
+				`https://reqres.in/api/users?page=${currentPage}&per_page=${perPage}`
+			)
+
+			setData(removeItem(response.data.data, row))
+			setTotalRows(totalRows - 1)
+		},
+		[currentPage, perPage, totalRows]
+	)
+
+	const columns = useMemo(
+		() => [
+			{
+				name: 'First Name',
+				selector: 'first_name',
+				sortable: true,
+			},
+			{
+				name: 'Last Name',
+				selector: 'last_name',
+				sortable: true,
+			},
+			{
+				name: 'Email',
+				selector: 'email',
+				sortable: true,
+			},
+			{
+				// eslint-disable-next-line react/button-has-type
+				cell: (row) => <button onClick={handleDelete(row)}>Delete</button>,
+			},
+		],
+		[handleDelete]
+	)
+
+	const handlePageChange = (page) => {
+		fetchUsers(page)
+		setCurrentPage(page)
+	}
+
+	const handlePerRowsChange = async (newPerPage, page) => {
+		fetchUsers(page, newPerPage)
+		setPerPage(newPerPage)
+	}
+
 	return (
-		<div className="mt-4 flex flex-col">
-			<div className=" sm:-mx-6 px-4 py-5 sm:p-6">
-				<div className="inline-block min-w-full py-2 align-middle">
-					<div className="shadow-sm ring-1 ring-black ring-opacity-5">
-						<table
-							className="min-w-full border-separate"
-							style={{ borderSpacing: 0 }}
-						>
-							<thead className="bg-gray-50">
-								<tr>
-									{props.rows.map((data, id) => (
-										<th
-											key={id}
-											scope="col"
-											className="capitalize sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8"
-										>
-											{data}
-										</th>
-									))}
-								</tr>
-							</thead>
-							<tbody className="bg-white">
-								{props.data.map((person, personIdx) => (
-									<tr key={personIdx}>
-										<td
-											className={classNames(
-												personIdx !== props.data.length - 1
-													? 'border-b border-gray-200'
-													: '',
-												'whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8'
-											)}
-										>
-											{person.name}
-										</td>
-										<td
-											className={classNames(
-												personIdx !== props.data.length - 1
-													? 'border-b border-gray-200'
-													: '',
-												'whitespace-nowrap px-3 py-4 text-sm text-gray-500 hidden sm:table-cell'
-											)}
-										>
-											{person.title}
-										</td>
-										<td
-											className={classNames(
-												personIdx !== props.data.length - 1
-													? 'border-b border-gray-200'
-													: '',
-												'whitespace-nowrap px-3 py-4 text-sm text-gray-500 hidden lg:table-cell'
-											)}
-										>
-											{person.email}
-										</td>
-										<td
-											className={classNames(
-												personIdx !== props.data.length - 1
-													? 'border-b border-gray-200'
-													: '',
-												'whitespace-nowrap px-3 py-4 text-sm text-gray-500'
-											)}
-										>
-											{person.role}
-										</td>
-										<td
-											className={classNames(
-												personIdx !== props.data.length - 1
-													? 'border-b border-gray-200'
-													: '',
-												'relative whitespace-nowrap py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-6 lg:pr-8'
-											)}
-										>
-											<a
-												href="#"
-												className="text-indigo-600 hover:text-indigo-900"
-											>
-												Edit<span className="sr-only">, {person.name}</span>
-											</a>
-										</td>
-									</tr>
-								))}
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+		<DataTable
+			title="Users"
+			columns={columns}
+			data={data}
+			progressPending={loading}
+			pagination
+			paginationServer
+			paginationTotalRows={totalRows}
+			paginationDefaultPage={currentPage}
+			onChangeRowsPerPage={handlePerRowsChange}
+			onChangePage={handlePageChange}
+			selectableRows
+			onSelectedRowsChange={({ selectedRows }) => console.log(selectedRows)}
+		/>
+	)
+}
+
+export default function index() {
+	return (
+		<div className="App">
+			<AdvancedPaginationTable />
 		</div>
 	)
 }
