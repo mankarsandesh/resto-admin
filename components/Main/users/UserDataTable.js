@@ -1,10 +1,25 @@
 import Link from 'next/link'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
+import {
+	ChevronLeftIcon,
+	ChevronRightIcon,
+	CheckCircleIcon,
+} from '@heroicons/react/20/solid'
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
 
 export default function UserDataTable(props) {
+	// Status add string
+	const renderStatusLabel = (status) => {
+		if (status === 0) {
+			return <button className="font-medium text-yellow-700">Inactive</button>
+		} else if (status === 1) {
+			return <button className="font-medium text-green-700">Active</button>
+		} else {
+			return <button className="font-medium text-red-700">Deleted</button>
+		}
+	}
+
 	return (
 		<div className="mt-4 flex flex-col">
 			<div className=" sm:-mx-6 px-4 py-5 sm:p-6">
@@ -45,10 +60,21 @@ export default function UserDataTable(props) {
 												personIdx !== props.data.length - 1
 													? 'border-b border-gray-200'
 													: '',
-												'whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-6 lg:pl-8'
+												'whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-6 lg:pl-8 flex'
 											)}
 										>
 											{person.userEmail}
+											{person.emailActive === 1 ? (
+												<CheckCircleIcon
+													className="h-5 w-5 text-green-600 ml-2"
+													aria-hidden="true"
+												/>
+											) : (
+												<CheckCircleIcon
+													className="h-5 w-5 text-red-600 ml-2"
+													aria-hidden="true"
+												/>
+											)}
 										</td>
 										<td
 											className={classNames(
@@ -65,10 +91,10 @@ export default function UserDataTable(props) {
 												personIdx !== props.data.length - 1
 													? 'border-b border-gray-200'
 													: '',
-												'whitespace-nowrap px-3 py-4 text-sm text-gray-500  sm:pl-6 lg:pl-8'
+												'whitespace-nowrap px-3 py-4 text-sm text-gray-500  sm:pl-6 lg:pl-8 '
 											)}
 										>
-											{person.status}
+											{renderStatusLabel(person.status)}
 										</td>
 										<td
 											className={classNames(
