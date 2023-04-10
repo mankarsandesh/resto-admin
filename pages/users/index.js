@@ -67,33 +67,6 @@ export default function Users() {
 		console.log('userList', userList)
 		fetchData()
 	}, [])
-	const data = [
-		{
-			name: 'Lindsay Walton',
-			title: 'Front-end Developer',
-			email: 'lindsay.walton@example.com',
-			role: 'Member',
-		},
-		{
-			name: 'Lindsay Walton',
-			title: 'Front-end Developer',
-			email: 'lindsay.walton@example.com',
-			role: 'Member',
-		},
-		{
-			name: 'Lindsay Walton',
-			title: 'Front-end Developer',
-			email: 'lindsay.walton@example.com',
-			role: 'Member',
-		},
-		{
-			name: 'Lindsay Walton',
-			title: 'Front-end Developer',
-			email: 'lindsay.walton@example.com',
-			role: 'Member',
-		},
-		// More people...
-	]
 	const rows = ['Full Name', 'email', 'type', 'status', '']
 	return (
 		<>
@@ -108,6 +81,3 @@ export default function Users() {
 		</>
 	)
 }
-// Users.getLayout = function getLayout(Users) {
-// 	return <defaultLayout>{Users}</defaultLayout>
-// }

@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 // Button
-const Button = () => {
+const Button = (props) => {
 	return (
 		<>
 			<div className="flex rounded-md shadow-sm mr-4 border h-12">
@@ -46,11 +46,14 @@ const Button = () => {
 	)
 }
 export default function Category() {
+	const [isLoading, setIsLoading] = useState(false)
 	const [categorylist, setCategorylist] = useState([])
 
 	useEffect(() => {
 		const url = process.env.BASE_URL + 'category'
 		const fetchData = async () => {
+			setIsLoading(true)
+			console.log(isLoading, 'isLoading')
 			try {
 				const headers = {
 					'Content-Type': 'application/json',
@@ -60,41 +63,17 @@ export default function Category() {
 					.then((response) => response.json())
 					.then((data) => {
 						console.log(data, 'dadsd')
+						setIsLoading(false)
 						setCategorylist(data.data)
 					})
 			} catch (error) {
 				console.log('error', error)
 			}
+
+			console.log(isLoading, 'isLoading11afafaf')
 		}
 		fetchData()
 	}, [])
-	const data = [
-		{
-			name: 'Lindsay Walton',
-			title: 'Front-end Developer',
-			email: 'lindsay.walton@example.com',
-			role: 'Member',
-		},
-		{
-			name: 'Lindsay Walton',
-			title: 'Front-end Developer',
-			email: 'lindsay.walton@example.com',
-			role: 'Member',
-		},
-		{
-			name: 'Lindsay Walton',
-			title: 'Front-end Developer',
-			email: 'lindsay.walton@example.com',
-			role: 'Member',
-		},
-		{
-			name: 'Lindsay Walton',
-			title: 'Front-end Developer',
-			email: 'lindsay.walton@example.com',
-			role: 'Member',
-		},
-		// More people...
-	]
 	const rows = ['name', 'description', 'created', '']
 	return (
 		<>
@@ -102,7 +81,11 @@ export default function Category() {
 				<div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-2 ">
 					<div className="px-4 sm:px-6 lg:px-8 ">
 						<PageHeader title="Category List" button={<Button />} />
-						<DataTable data={categorylist} rows={rows} />
+						{isLoading ? (
+							'Loading...'
+						) : (
+							<DataTable data={categorylist} rows={rows} />
+						)}
 					</div>
 				</div>
 			</main>
